@@ -11,7 +11,7 @@
 
     <h1>Bonjour </h1>
 
-    <form>
+    <form action="result.php" method="post">
         <h2>Ajouter un produit</h2>
         <fieldset>
             <label for="product">Produit</label>
