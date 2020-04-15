@@ -1,13 +1,25 @@
 <?php
-session_start();
-// $nom = $_GET['nom'] ?? null;
-// null, '', [], 0, false
+session_start(); // Démarrage d'une session PHP. Obligatoire pour accéder à la variable $_SESSION.
+
+// $_SESSION est un tableau (array)
+// Ici, on crée dans $_SESSION l'élément "products" qui est lui même un tableau (array)
+// $_SESSION['products'] contiendra la liste des produits ajoutés via le formulaire de cette page
+if(empty($_SESSION['products'])) {
+    $_SESSION['products'] = [];
+}
+    
+// $_GET contient les variables passées dans l'url (ie: ?nom=Mike)
+
+// sont considérés "empty" :    null, '', [], 0, false
 if (empty($_GET['nom'])) {
+    // Si l'url ne contient pas le paramètre 'nom', on redirige l'utilisateur vers l'index.
     header('location: ./index.html');
-    exit();
+    exit(); // exit obligatoire après un header('location...')
 }
 
-$nom = basename($_GET['nom']);
+// Passé cette ligne, on sait que le paramètre 'nom' existe et n'est pas vide !
+
+$nom = basename($_GET['nom']); // récupération du paramètre d'url 'nom' dans la variable $nom.
 
 ?>
 <html>
@@ -43,7 +55,7 @@ $nom = basename($_GET['nom']);
         <h2>Liste des produits</h2>
         <?php
         //var_dump($_SESSION);
-
+        // Parcours des produits ajoutés (voir result.php)
         foreach ($_SESSION['products'] as $product) {
             echo ('<p>'. $product['nom'] . ' à ' .  $product['prix'] . '€ ajouté par ' . $product['utilisateur']. '</p>');
         }
