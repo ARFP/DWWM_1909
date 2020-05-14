@@ -4,9 +4,10 @@
  * 
  * @package mystring 
  * @author MDevoldere 
- * @version 1.0.0 $ 
+ * @version 1.0.0
  * @access public 
  * @see https://github.com/mdevoldere/DWWM_1909/tree/master/Php/mystring
+ * @see https://github.com/mdevoldere/DWWM_1909/blob/master/Php/mystring/docs/MyString.svg
  */ 
 class MyString
 {
