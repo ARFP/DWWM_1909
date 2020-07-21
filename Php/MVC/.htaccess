@@ -1,0 +1,11 @@
+# Activer le moteur de réécriture d'URL du serveur Apache
+RewriteEngine On
+
+# si la requete ne pointe pas sur un répertoire physique
+RewriteCond %{REQUEST_FILENAME} !-f
+# si la requete ne pointe pas sur un fichier physique
+RewriteCond %{REQUEST_FILENAME} !-d
+# si la requete ne pointe pas sur favison.ico
+RewriteCond %{REQUEST_FILENAME} !favicon.ico
+# redirige toutes les requêtes vers index.php
+RewriteRule ^(.*)$ index.php
