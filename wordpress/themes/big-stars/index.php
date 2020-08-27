@@ -8,7 +8,12 @@
 
 // chargement du fichier "header.php"
 get_header();
+?>
 
+<section class="liste">
+<h2>index.php</h2>
+
+<?php
 
 // La boucle wordpress
 // // un post = un article ou une page
@@ -29,6 +34,11 @@ if(have_posts()) { // si un ou des post(s) est (sont) associé(s) à l'url deman
         <article>
             <?php the_date(); // date du post ?>
             <h2>
+                <?php
+                    if(has_post_thumbnail()) {
+                        the_post_thumbnail('thumbnail'); // afficher l'image de mise en avant au format "miniature"
+                    }
+                ?>
                 <a href="<?php the_permalink(); // url du post ?>">
                     <?php the_title(); // titre du post ?>
                 </a>
@@ -40,6 +50,11 @@ if(have_posts()) { // si un ou des post(s) est (sont) associé(s) à l'url deman
     } // fin du while
 } // fin du if
 
+?>
+
+</section>
+
+<?php
 
 
 // chargement du fichier "footer.php"

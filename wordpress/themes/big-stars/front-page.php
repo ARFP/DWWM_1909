@@ -1,15 +1,16 @@
 <?php
 /**
- * single.php 
- * Affichage d'un "post" unique
+ * front-page.php 
+ * fichier correspondant à la page d'accueil du site
+ * Selon la configuration de wordpress (règlages->lecture), 
+ * ce fichier affichera soit les derniers articles, soit la page statique choisie.
  */
-
 // chargement du fichier "header.php"
 get_header();
 ?>
 
 <section class="liste">
-<h2>single.php</h2>
+<h2>front-page.php</h2>
 
 <?php
 
@@ -26,17 +27,18 @@ if(have_posts()) {
                 <?php
                     // afficher l'image de mise en avant si elle existe
                     if(has_post_thumbnail()) {
-                        the_post_thumbnail(); // pas de paramètre = grande taille
+                        //the_post_thumbnail(); // pas de paramètre = grande taille
                         //the_post_thumbnail('large'); // image grande taille
                         //the_post_thumbnail('medium'); // image taille moyenne
-                        //the_post_thumbnail('thumbnail'); // image miniature
+                        the_post_thumbnail('thumbnail'); // image miniature
                     }
-                    
+
+                                        
                 ?>
             </div>
             <div>
             <?php 
-                the_content(); 
+               // the_content(); 
             ?>
             </div>
         </article>
