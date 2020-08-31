@@ -7,9 +7,9 @@
 // chargement du fichier "header.php"
 get_header();
 ?>
+<p>single.php</p>
 
-<section class="liste">
-<h2>single.php</h2>
+<section class="single">
 
 <?php
 
@@ -22,21 +22,20 @@ if(have_posts()) {
         <article>
             <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
             <p><?php the_date(); ?></p>
-            <div>
+            <figure>
                 <?php
                     // afficher l'image de mise en avant si elle existe
                     if(has_post_thumbnail()) {
-                        the_post_thumbnail(); // pas de paramètre = grande taille
+                        //the_post_thumbnail(); // pas de paramètre = grande taille
                         //the_post_thumbnail('large'); // image grande taille
-                        //the_post_thumbnail('medium'); // image taille moyenne
+                        the_post_thumbnail('medium'); // image taille moyenne
                         //the_post_thumbnail('thumbnail'); // image miniature
-                    }
-                    
+                    }                  
                 ?>
-            </div>
+            </figure>
             <div>
             <?php 
-                the_content(); 
+               the_content(); // affichage de l'article 
             ?>
             </div>
         </article>

@@ -9,8 +9,20 @@
 get_header();
 ?>
 
+<section class="sidebars">
+    <?php
+    // chargement de la sidebar dont l'id est "bigstars-principal"
+    // fonctionne si le support des widgets est activé dans functions.php 
+   
+    if(is_active_sidebar('bigstars-principal')) {
+        dynamic_sidebar('bigstars-principal');
+    }        
+    ?>
+</section>
+
+<p>front-page.php</p>
+
 <section class="liste">
-<h2>front-page.php</h2>
 
 <?php
 
@@ -23,7 +35,7 @@ if(have_posts()) {
         <article>
             <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
             <p><?php the_date(); ?></p>
-            <div>
+            <figure>
                 <?php
                     // afficher l'image de mise en avant si elle existe
                     if(has_post_thumbnail()) {
@@ -35,10 +47,10 @@ if(have_posts()) {
 
                                         
                 ?>
-            </div>
+            </figure>
             <div>
             <?php 
-               // the_content(); 
+               the_excerpt(); // affichage de l'extrait 
             ?>
             </div>
         </article>

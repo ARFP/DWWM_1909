@@ -13,7 +13,14 @@
 
 </head>
 <body>
-    <h1><?php bloginfo('name'); // Le titre du blog ?></h1>
-    <h2><?php bloginfo('description'); // Le titre du blog ?></h2>
-    <h3><?php echo bloginfo('template_url'); ?></h3>
+    <header>
+        <img src="<?=bloginfo('template_url'); ?>/img/logo.png" />
+        <h1><?php bloginfo('name'); // Le titre du blog ?></h1>
+        <h2><?php bloginfo('description'); // Le titre du blog ?></h2>
+        <div>
+            <a href="<?php bloginfo('url'); // Le titre du blog ?>">Accueil</a> | Futur Menu
+        </div>
+    </header>
+    
     <main>
+

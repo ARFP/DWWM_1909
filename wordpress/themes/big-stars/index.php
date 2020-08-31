@@ -31,18 +31,27 @@ if(have_posts()) { // si un ou des post(s) est (sont) associé(s) à l'url deman
         //      https://codex.wordpress.org/fr:Fonctions_de_r%C3%A9f%C3%A9rence
         ?>
 
-        <article>
-            <?php the_date(); // date du post ?>
-            <h2>
+<article>
+            <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+            <p><?php the_date(); ?></p>
+            <figure>
                 <?php
+                    // afficher l'image de mise en avant si elle existe
                     if(has_post_thumbnail()) {
-                        the_post_thumbnail('thumbnail'); // afficher l'image de mise en avant au format "miniature"
+                        //the_post_thumbnail(); // pas de paramètre = grande taille
+                        //the_post_thumbnail('large'); // image grande taille
+                        //the_post_thumbnail('medium'); // image taille moyenne
+                        the_post_thumbnail('thumbnail'); // image miniature
                     }
+
+                                        
                 ?>
-                <a href="<?php the_permalink(); // url du post ?>">
-                    <?php the_title(); // titre du post ?>
-                </a>
-            </h2>
+            </figure>
+            <div>
+            <?php 
+               the_content(); // affichage de l'extrait 
+            ?>
+            </div>
         </article>
 
 
