@@ -163,3 +163,17 @@ footer p {
     width: 100px;
     height: 100px;
 }
+
+
+
+/* MENU */
+.bigstars-menu {
+    padding: 0;
+    margin: 0;
+}
+.bigstars-menu li {
+    display: inline-block;
+    list-style: none;
+    border: 1px solid #FFF;
+    padding: 10px;
+}

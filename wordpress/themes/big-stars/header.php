@@ -17,9 +17,20 @@
         <img src="<?=bloginfo('template_url'); ?>/img/logo.png" />
         <h1><?php bloginfo('name'); // Le titre du blog ?></h1>
         <h2><?php bloginfo('description'); // Le titre du blog ?></h2>
-        <div>
-            <a href="<?php bloginfo('url'); // Le titre du blog ?>">Accueil</a> | Futur Menu
-        </div>
+                    
+            <?php
+                if(has_nav_menu('menu-bigstars')) {
+                    wp_nav_menu([
+                        'theme_location' => 'menu-bigstars', // identifiant du menu (theme location)
+                        'menu_class' => 'bigstars-menu', // classe css associée au menu
+                    ]);
+                }
+                
+            ?>
+        
+        <nav>
+            
+        </nav>
     </header>
     
     <main>

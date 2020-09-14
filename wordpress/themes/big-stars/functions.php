@@ -55,3 +55,74 @@ function bigstars_sidebars() {
 add_action('widgets_init', 'bigstars_sidebars');
 
 
+
+
+function wpm_custom_post_type(){
+
+    //D'abord les infos qui seront affichées dans le panneau d'admin
+
+    $labels = [
+        //Nom singulier
+        'name'              => _x('galaxie', 'Post Type General Name'),
+        'singular_name'     => _x('galaxies', 'Post Type Singular Name'), // _x fonction qui permet de traduire grace aux fichiers 'PO', fonctionne également avec
+        //Libeleé dans le menu                                               __(, _e, et _n                                   
+        'menu_name'         => __('Les galaxies'),
+        //Pour les différentes actions que l'on peut faire dans le panneau d'admin (à vérif)
+        'all_item'          => __('Toutes les galaxies'),
+        'view-item'         => __('Voir les galaxies'),
+        'add_new_item'      => __('Ajouter une nouvelle galaxie'),
+        'add_new'           => __('Ajouter une galaxie'),
+        'edit_item'         => __('Editer une étoile'),
+        'uptdate_item'      => __('Modifier une étoile'),
+        'search_item'       => __('Rechercher la couleur d\'une galaxie'),
+        'not_found'         => __('Non trouvée'),
+        'not_found_in_trash'=> __('Non trouvée dans la corbeille'),
+    ];
+
+    $args = array(
+        'label'             => __( 'Les galaxies'),
+        'description'       => __( 'Toutes les galaxies de l\'univers'),
+        'labels'            => $labels,
+        'menu_icon'         => 'dashicons-star-filled', // pour l'incône du menu ->> https://developer.wordpress.org/resource/dashicons/#editor-video
+        // sert a définir le titre, l'éditeur, auteur, mais comment voir ça ? )
+        'supports'          => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'custom-fields', ),
+        /* 
+        * Différentes options supplémentaires
+        */
+        'show_in_rest'      => true,
+        'hierarchical'      => false,
+        'public'            => true,
+        'has_archive'       => true,
+        'rewrite'			=> array( 'slug' => 'galaxies'),
+
+    );
+
+    register_post_type( 'galaxies', $args );
+
+}
+
+//Pour rajouter le support des tag de titres
+add_action( 'init', 'wpm_custom_post_type', 0 );
+
+
+/** MENU */
+/* ajouter 1 seul "emplacement" de menu  
+function bigstars_menus()
+{
+    register_nav_menu('menu-bigstars',  __('Menu Bigstars'));
+}
+
+add_action('init', 'bigstars_menus');
+
+*/
+
+/* ajouter plusieurs "emplacements" de menu */
+function bigstars_menus()
+{
+    register_nav_menus([
+        'menu-bigstars' => __('Menu Bigstars'),
+        'menu-footer' => __('Menu footer'),
+    ]);
+}
+
+add_action('init', 'bigstars_menus');
