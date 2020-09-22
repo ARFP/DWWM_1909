@@ -43,9 +43,7 @@ if(have_posts()) {
                         //the_post_thumbnail('large'); // image grande taille
                         //the_post_thumbnail('medium'); // image taille moyenne
                         the_post_thumbnail('thumbnail'); // image miniature
-                    }
-
-                                        
+                    }                 
                 ?>
             </figure>
             <div>

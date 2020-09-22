@@ -1,4 +1,5 @@
 <?php
+
 /**
  * functions.php
  * Ce fichier permet de définir les fonctionnalités de notre thème
@@ -21,8 +22,8 @@ add_theme_support('post-thumbnails');
  * Une fois qu'une sidebar (ou plus) est délcarée, on peut y ajouter des widgets
  * Direction le back-office sous le menu "Apparence -> widgets"
  */
-function bigstars_sidebars() {
-
+function bigstars_sidebars()
+{
     // Déclaration d'une sidebar dont l'identifiant (id) est bigstars-principal
     register_sidebar([
         'name' => 'Principal',
@@ -46,7 +47,6 @@ function bigstars_sidebars() {
         'after_title' => '',
 
     ]);
-
 }
 
 // add_action permet d'exécuter des fonction à un instant T du chargement de wordpress
@@ -55,66 +55,58 @@ function bigstars_sidebars() {
 add_action('widgets_init', 'bigstars_sidebars');
 
 
+/** CUSTOM POST TYPES */
 
-
-function wpm_custom_post_type(){
-
-    //D'abord les infos qui seront affichées dans le panneau d'admin
-
+function bigstars_custom_post_type()
+{
     $labels = [
-        //Nom singulier
-        'name'              => _x('galaxie', 'Post Type General Name'),
-        'singular_name'     => _x('galaxies', 'Post Type Singular Name'), // _x fonction qui permet de traduire grace aux fichiers 'PO', fonctionne également avec
-        //Libeleé dans le menu                                               __(, _e, et _n                                   
-        'menu_name'         => __('Les galaxies'),
-        //Pour les différentes actions que l'on peut faire dans le panneau d'admin (à vérif)
-        'all_item'          => __('Toutes les galaxies'),
-        'view-item'         => __('Voir les galaxies'),
-        'add_new_item'      => __('Ajouter une nouvelle galaxie'),
-        'add_new'           => __('Ajouter une galaxie'),
-        'edit_item'         => __('Editer une étoile'),
-        'uptdate_item'      => __('Modifier une étoile'),
-        'search_item'       => __('Rechercher la couleur d\'une galaxie'),
-        'not_found'         => __('Non trouvée'),
-        'not_found_in_trash'=> __('Non trouvée dans la corbeille'),
+        'name'              => 'galaxie',
+        'all_items'          => 'Toutes les galaxies',
+        'singular_name'     => 'galaxie',
+        // Menu Admin                                  
+        'menu_name'         => 'Les galaxies',
+        'add_new_item'      => 'Ajouter une nouvelle galaxie',
+        'edit_item'         => 'Editer une galaxie',
     ];
 
     $args = array(
-        'label'             => __( 'Les galaxies'),
-        'description'       => __( 'Toutes les galaxies de l\'univers'),
+        'rewrite'            => array('slug' => 'galaxies'),
         'labels'            => $labels,
-        'menu_icon'         => 'dashicons-star-filled', // pour l'incône du menu ->> https://developer.wordpress.org/resource/dashicons/#editor-video
-        // sert a définir le titre, l'éditeur, auteur, mais comment voir ça ? )
-        'supports'          => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'custom-fields', ),
-        /* 
-        * Différentes options supplémentaires
-        */
+        'label'             => 'Galaxies',
+        'description'       => 'Les galaxies de l\'univers',
+        'menu_icon'         => 'dashicons-star-filled',
         'show_in_rest'      => true,
-        'hierarchical'      => false,
         'public'            => true,
         'has_archive'       => true,
-        'rewrite'			=> array( 'slug' => 'galaxies'),
-
+        'supports'          => array('title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'custom-fields',),
     );
 
-    register_post_type( 'galaxies', $args );
+    register_post_type('galaxies', $args);
+
+    
+    $taxonomy_labels = [
+        'name' => 'Type de galaxie',
+        'new_item_name' => 'Nouveau type',
+    ];
+
+    $taxonomy_args = [
+        'labels' => $taxonomy_labels,
+        'public' => true,
+        'show_in_rest' => true, 
+    ];
+
+    register_taxonomy('galaxies-type', 'galaxies', $taxonomy_args);
 
 }
 
 //Pour rajouter le support des tag de titres
-add_action( 'init', 'wpm_custom_post_type', 0 );
+add_action('init', 'bigstars_custom_post_type', 0);
+
+
+
 
 
 /** MENU */
-/* ajouter 1 seul "emplacement" de menu  
-function bigstars_menus()
-{
-    register_nav_menu('menu-bigstars',  __('Menu Bigstars'));
-}
-
-add_action('init', 'bigstars_menus');
-
-*/
 
 /* ajouter plusieurs "emplacements" de menu */
 function bigstars_menus()
@@ -126,3 +118,11 @@ function bigstars_menus()
 }
 
 add_action('init', 'bigstars_menus');
+
+/* ou pour ajouter 1 seul "emplacement" de menu  
+function bigstars_menus()
+{
+    register_nav_menu('menu-bigstars',  __('Menu Bigstars'));
+}
+add_action('init', 'bigstars_menus');
+*/

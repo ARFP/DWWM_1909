@@ -11,7 +11,7 @@ get_header();
 ?>
 
 <section class="liste">
-<h2>single-galaxies.php</h2>
+<h2>archive-galaxies.php</h2>
 
 <?php
 
@@ -32,9 +32,8 @@ if(have_posts()) { // si un ou des post(s) est (sont) associé(s) à l'url deman
         ?>
 
 <article>
-            <h2 style="text-align: right;"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+            <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
             <p><?php the_date(); ?></p>
-            
             <figure>
                 <?php
                     // afficher l'image de mise en avant si elle existe
@@ -43,19 +42,21 @@ if(have_posts()) { // si un ou des post(s) est (sont) associé(s) à l'url deman
                         //the_post_thumbnail('large'); // image grande taille
                         //the_post_thumbnail('medium'); // image taille moyenne
                         the_post_thumbnail('thumbnail'); // image miniature
-                    }                                        
+                    }
+
+                                        
                 ?>
             </figure>
             <div>
-                <aside> C'est une galaxie de type 
+            <aside> Type de galaxie : 
                     <?php
                         $id = get_the_ID();
                         the_terms($id, 'galaxies-type');
                     ?>
-                </aside>
-                <?php 
-                the_content(); // affichage de l'extrait 
-                ?>
+            </aside>
+            <?php 
+               the_content(); // affichage de l'extrait 
+            ?>
             </div>
         </article>
 
