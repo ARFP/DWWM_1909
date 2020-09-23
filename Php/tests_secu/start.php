@@ -1,13 +1,52 @@
 <?php
-
-function debug($var = null)
+/**
+ * Affiche une variable suivie d'une barre horizontale.
+ * @var $var la variable à afficher
+ */
+function display($var)
 {
-    echo gettype($var).' = '.var_export($var, true);
-    echo '<hr>';
+    echo $var.'<hr>';
 }
 
-$input = null;
+// Entrée utilisateur
+$input = "<script>alert('Hello world');</script>";
 
-debug($input);
+display($input);
 
-echo $input;
+
+
+// supprime les chevrons < > et les quotes ' " et les remplace par leur entité HTML
+$input_specialchars = htmlspecialchars($input);
+
+display($input_specialchars);
+
+
+
+// convertit tous les caractères spéciaux en leur équivalent "entité HTML"
+$input_entities = htmlentities($input);
+
+display($input_entities);
+
+
+
+// supprime les balises XML et HTML
+$input_strip_tags = strip_tags($input);
+
+display($input_strip_tags);
+
+
+
+
+// Entrée utilisateur
+$input = "../wp-1909/wp-config.php";
+
+display($input);
+
+
+
+// supprime toute notion de "chemin" (url, uri, chemin local)
+$input = basename($input);
+
+display($input);
+
+?>

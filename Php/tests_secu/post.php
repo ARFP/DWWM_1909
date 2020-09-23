@@ -16,6 +16,11 @@ $product_price          = $_POST['price'];
 $product_description    = $_POST['description'];
 
 
+if(strlen($product_name) < 2 || strlen($product_name) > 50) {
+    exit('error');
+}
+
+
 switch ($product_id) {
 
     case '0': // nouveau produit

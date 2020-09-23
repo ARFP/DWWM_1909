@@ -1,11 +1,14 @@
 <?php
+// Chargement du fichier DbProducts
 require 'DbProducts.php';
 
+// Initialisation de la base de données
 $db = new DbProducts();
 
+// Si le formulaire est soumis, on charge post.php qui gère le traiement du formulaire.
 if (!empty($_POST)) {
     require 'post.php';
-    exit;
+    exit; // pour stopper le script ici (la suite ne sera pas exécutée)
 }
 ?>
 <html>
@@ -33,15 +36,15 @@ if (!empty($_POST)) {
             </tr>
 
             <?php
-            $products = $db->getProducts();
+            $products = $db->getProducts(); // chargement des produits à partir de la base de données
 
-            foreach ($products as $p) {
+            foreach ($products as $p) { // Pour chaque produit, on complète une ligne de tableau
 
                 echo '<tr>';
                 echo '<td>' . $p['id'] . '</td>';
                 echo '<td><a href="?product=' . $p['id'] . '">' . $p['name'] . '</a></td>';
                 echo '<td>' . $p['price'] . '</td>';
-                echo '<td>' . $p['description'] . '</td>';
+                echo '<td>' . htmlspecialchars($p['description']) . '</td>';
                 echo '</tr>';
             }
             ?>
@@ -74,7 +77,7 @@ if (!empty($_POST)) {
                 <input type="number" id="price" name="price" value="<?=($product['price'] ?? '19.99'); ?>" step="0.01">
                 <br>
                 <label for="description">Description</label>
-                <textarea id="description" name="description" value="<?=($product['description'] ?? ''); ?>" placeholder="Product Description"></textarea>
+                <textarea id="description" name="description" placeholder="Product Description"><?=($product['description'] ?? ''); ?></textarea>
             </fieldset>
 
             <button type="submit">Save</button>

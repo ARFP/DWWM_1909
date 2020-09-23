@@ -3,7 +3,7 @@
 class DbProducts
 {
     /**@var PDO $pdo Connexion vers la base de données */
-    private $pdo;
+    private PDO $pdo;
 
     /**
      * Initialisation de la base de données de test (ouverture de la connexion)
@@ -46,27 +46,46 @@ class DbProducts
 
     public function addProduct(string $name, float $price, string $description = null)
     {
+        $description = strip_tags($description);
+
+        /* $sql = "INSERT INTO products 
+                (name,price,description) 
+                VALUES 
+                ('".$name."', '".$price."', '".$description."')";
+
+        echo $sql; */
+
         $sql = "INSERT INTO products 
                 (name,price,description) 
                 VALUES 
-                ('".$name."', '".$price.", '".$description."')";
+                (:name, :price, :description)";
 
-        echo $sql;
+        $stmt = $this->pdo->prepare($sql);
 
-        // return $this->pdo->exec($sql);
+        $values = [
+            ':name' => $name,
+            ':price' => $price,
+            ':description' => $description
+        ];
+
+        $stmt->execute($values);
+
+        $stmt->closeCursor();
+
+        return;
     }
 
-    public function updateProduct(int $id, string $name, float $price, string $description = null)
+    public function updateProduct($id, string $name, float $price, string $description = null)
     {
         $sql = "UPDATE products SET 
                 name='".$name."', 
                 price='".$price."', 
                 description='".$description."' 
-                WHERE id='".$id."';";
+                WHERE id='".$id."' LIMIT 1;";
 
         echo $sql;
 
-        // return $this->pdo->exec($sql);
+        return $this->pdo->exec($sql);
     }
 
     public function deleteProduct(int $id)

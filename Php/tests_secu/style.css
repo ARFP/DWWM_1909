@@ -82,3 +82,7 @@ th:nth-child(2) {
 th:nth-child(3) {
     width: 100px;
 }
+
+.pad {
+    padding-top: 30px;
+}
