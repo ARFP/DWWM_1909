@@ -7,7 +7,7 @@ function d($var) {
 
 require 'Loader.php';
 
-$route = new Route('/immochateau_mvc/');
+$route = new Route('/');
 
 d($route);
 
